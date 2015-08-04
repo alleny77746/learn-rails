@@ -86,4 +86,21 @@ config.action_mailer.smtp_settings = {
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+# email enabled in production
+  config.action_mailer.default_url_options = { :host => Rails.application.secrets.allen-learn-rails }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: Rails.application.secrets.allen-learn-rails,
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: Rails.application.secrets.email_provider_username,
+    password: Rails.application.secrets.email_provider_password
+}
+
 end
+
